@@ -1,0 +1,16 @@
+# Workflow name
+name: First workflow
+# Action that triggers it
+on: [push]
+# Jobs that run in parallel when workflow triggered
+jobs:
+  # Name of the job
+  run-shell-commands:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo a string
+        uses: echo "Hello World!"
+      - name: Run a multi-line script
+        run: |
+          node -v
+          npm -v
