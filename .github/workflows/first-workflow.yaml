@@ -2,7 +2,7 @@
 name: First workflow
 # Action that triggers it
 on: [push]
-# Jobs that run in parallel when workflow triggered
+# Jobs that run when workflow triggered
 jobs:
   # Name of the job
   run-shell-commands:
@@ -14,3 +14,19 @@ jobs:
         run: |
           node -v
           npm -v
+  # This is a job that runs in parallel (runs at the same time as another job)
+  parallel-job-macos:
+    runs-on: macos-latest
+    steps:
+      - name: view SW version
+        run: sw_vers
+  # This is a dependant job (it runs after another has finished)
+  dependant-job-windows:
+    runs-on: windows-latest
+    # Needs to wait for the job specified to finish before running
+    needs: run-shell-commands
+    steps:
+      - name: echo a string
+        run: echo "Hello World!"
+      - name: error step
+        run: doesnotexits
