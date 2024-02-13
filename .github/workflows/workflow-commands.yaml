@@ -14,3 +14,14 @@ jobs:
         run: echo "::warning title:Warning title, title file=app.js,line=2,endline=3,col=5,endColumn=7::Missing semicolon"
       - name: Setting a notice message with params
         run: echo "::notice title:Notice title, title file=app.js,line=2,endline=3,col=5,endColumn=7::Missing semicolon"
+      # Anything beteween the group start and end will be included in the group
+      - name: Group of logs
+        run: |
+          echo "::group:: My group title"
+          echo "This is the content of the group"
+          echo "::endgroup::"
+      # Sometimes you may want to hide sensitive information from the logs
+      - name: Masking a value
+        run: echo "::add-mask::This is a secret"
+      - name: Echo a secret
+        run: echo "This is a secret"
