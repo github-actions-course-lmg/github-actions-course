@@ -7,13 +7,13 @@ jobs:
       - name: Setting an error message
         run: echo "::error::Missing semicolon
       - name: Setting an error message with params
-        run: echo "::error title:Error title, title file=app.js,line=2,endline=3,col=5,endColumn=7::Missing semicolon"
+        run: echo "::error title=Error title, title file=app.js,line=2,endline=3,col=5,endColumn=7::Missing semicolon"
       - name: Setting a debug message with params
-        run: echo "::debug title:Debug title, title file=app.js,line=2,endline=3,col=5,endColumn=7::Missing semicolon"
+        run: echo "::debug title=Debug title, title file=app.js,line=2,endline=3,col=5,endColumn=7::Missing semicolon"
       - name: Setting a warning message with params
-        run: echo "::warning title:Warning title, title file=app.js,line=2,endline=3,col=5,endColumn=7::Missing semicolon"
+        run: echo "::warning title=Warning title, title file=app.js,line=2,endline=3,col=5,endColumn=7::Missing semicolon"
       - name: Setting a notice message with params
-        run: echo "::notice title:Notice title, title file=app.js,line=2,endline=3,col=5,endColumn=7::Missing semicolon"
+        run: echo "::notice title=Notice title, title file=app.js,line=2,endline=3,col=5,endColumn=7::Missing semicolon"
       # Anything beteween the group start and end will be included in the group
       - name: Group of logs
         run: |
@@ -21,7 +21,9 @@ jobs:
           echo "This is the content of the group"
           echo "::endgroup::"
       # Sometimes you may want to hide sensitive information from the logs
+      # You can use the add-mask command to hide the value of a string
       - name: Masking a value
         run: echo "::add-mask::This is a secret"
+      # This is what the echo would look like without being masked
       - name: Echo a secret
         run: echo "This is a secret"
