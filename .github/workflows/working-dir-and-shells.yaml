@@ -1,8 +1,15 @@
 name: Working dirs & shells
 on: [push]
+# We can specifcy the termial shell to use at the workflow level (this will be used for all jobs)
+defaults:
+  run:
+    shell: bash
+    # We can also specify the working directory to use at the workflow level (this will be used for all jobs)
+    # working-directory: /de/ed
 jobs:
   display-wd-info:
     runs-on: ubuntu-latest
+    # We could also specify the working directory to use at the job level (this will override the workflow level setting)
     steps:
       - name: Display working dir and list files
         run: |
@@ -11,13 +18,28 @@ jobs:
           echo $GITHUB_SHA
           echo $GITHUB_REPOSITORY 
           echo $GITHUB_WORKSPACE
+      - name: Change working directory
+        # We can also specify the working directory to use at the step level (this will override the workflow and job level setting)
+        working-directory: /home/runner
+        run: pwd
+  # Note the difference in the commands used - this is because windows uses a powershell rather than bash shell by default
   display-wd-info-windows:
     runs-on: windows-latest
+    # We can also specify the shell to use at the job level (this will override the workflow level setting)
+    defaults:
+      run:
+        shell: pwsh
     steps:
       - name: Display working dir and list files
         run: |
-          pwd
-          ls -a
-          echo $GITHUB_SHA
-          echo $GITHUB_REPOSITORY
-          echo $GITHUB_WORKSPACE
+          Get-Location
+          dir
+          echo $env:GITHUB_SHA
+          echo $env:GITHUB_REPOSITORY
+          echo $env:GITHUB_WORKSPACE
+      - name: Python Shell
+        # We can also specify the shell to use at the step level (this will override the job and workflow level settings)
+        shell: python
+        run: |
+          import platform
+          print(platform.processor())
