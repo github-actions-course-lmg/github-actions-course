@@ -1,0 +1,12 @@
+name: Workflow run
+on:
+  workflow_run:
+    workflows: ["Repo events"]
+    types: [completed]
+
+jobs:
+  echo-string:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo string
+        run: echo "Hello, world!"
