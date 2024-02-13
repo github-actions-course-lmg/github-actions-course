@@ -1,8 +1,13 @@
+# It is worth noting that workflow runs only allows 3 levels of nesting
+# This means that you can't have a workflow run inside a workflow run inside a workflow run
+# But can have a workflow run inside a workflow run inside a workflow
 name: Workflow run
 on:
   workflow_run:
     workflows: ["Repo events"]
     types: [completed]
+    branches:
+      - main
 
 jobs:
   echo-string:

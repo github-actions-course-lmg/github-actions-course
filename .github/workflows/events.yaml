@@ -3,15 +3,35 @@ name: Repo events
 # on: [push, pull_request, issues]
 # However, for certain events, we only want to trigger the workflow for specific activity types
 # For example, we don't want to trigger the workflow for pull requests that are closed
-# Another example would be that we only want to trigger the workflow on pushes to certai branches
+# Another example would be that we only want to trigger the workflow on pushes to certain branches
 on:
   push:
-    # branches:
-    #   - main
-    #   - dev
+    # If we only wanted it to run on certain branches, we would add the branches property, otherwise
+    # we would leave it empty after the colon
+    branches:
+      - main
+      # We can also use branch patterns rather than specific branch names
+      - "feature/*" # This would trigger the workflow on any branch that starts with 'feature/' e.g., feature/123 or feature/abc
+      - "!feature/*/*" # This would ignore any branch that starts with 'feature/' and has another '/' after it
+      # Note that the order of the branch patterns is important i.e., if you put '!feature/*/*' before 'feature/*', the workflow will not trigger on any branch that starts with 'feature/
+    # We can also ignore certain branches, but we cannot use 'branches' and 'branches-ignore' together
+    # branches-ignore:
+    #   - develop
+    tags:
+      - v1.* # This would trigger the workflow on any tag that starts with 'v1.' e.g., v1.0 or v1.1
+      - "!v1.0" # This would ignore the tag 'v1.0'
+    # 'tags_ignore' is also available but similarly to branches, we cannot use 'tags' and 'tags-ignore' together
+    paths:
+      - "src/*" # This would trigger the workflow on any push that modifies files in the 'src' directory
+      - "!src/secret/*" # This would ignore any push that modifies files in the 'src/secret' directory
+      - "!app.js" # This would ignore any push that modifies the 'app.js' file
   pull_request:
     # Refer to docs to see activity types for the different events or hover over 'types' in the editor
     types: [opened, assigned, synchronize, reopened]
+    branches:
+      - main
+    paths:
+      - "**.js"
   issues:
     types: [opened]
 
