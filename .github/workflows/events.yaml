@@ -1,5 +1,19 @@
 name: Repo events
-on: [push, pull_request, issues]
+# We can specify the events that we want to trigger the workflow like this
+# on: [push, pull_request, issues]
+# However, for certain events, we only want to trigger the workflow for specific activity types
+# For example, we don't want to trigger the workflow for pull requests that are closed
+# Another example would be that we only want to trigger the workflow on pushes to certai branches
+on:
+  push:
+    # branches:
+    #   - main
+    #   - dev
+  pull_request:
+    # Refer to docs to see activity types for the different events or hover over 'types' in the editor
+    types: [opened, assigned, synchronize, reopened]
+  issues:
+    types: [opened]
 
 jobs:
   checkout-test:
