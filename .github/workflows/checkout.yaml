@@ -14,3 +14,13 @@ jobs:
           git checkout main
       - name: List files after
         run: ls -a
+  # We can also use the checkout action to achieve the same result
+  checkout-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: List files before
+        run: ls -a
+      - name: Download repo
+        uses: actions/checkout@v3
+      - name: List files after
+        run: ls -a
