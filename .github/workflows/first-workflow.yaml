@@ -29,4 +29,4 @@ jobs:
       - name: echo a string
         run: echo "Hello World!"
       - name: error step
-        run: doesnotexits
+        run: doesnotexists
