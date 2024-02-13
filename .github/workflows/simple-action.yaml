@@ -1,0 +1,18 @@
+name: Simple action
+on: [push]
+
+jobs:
+  simple-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Simple JS Action
+        id: greet
+        # When refering a public action, you can use the owner/repo@ref syntax
+        # The ref can be a branch, tag, or a release
+        uses: actions/hello-world-javascript-action@v1
+        # With is used to pass inputs to the action
+        with:
+          who-to-greet: "Mona the Octocat"
+        # We can access the output of the action using steps.<step-id>.outputs.<output-id>
+      - name: Log greeting time
+        run: echo "The time was ${{ steps.greet.outputs.time }}"
