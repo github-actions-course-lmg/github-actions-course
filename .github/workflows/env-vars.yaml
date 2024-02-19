@@ -24,8 +24,8 @@ jobs:
         # We can set env vars for the next steps but they won't be available prior to this
         # This '"$GITHUB_ENV"' is a special file that we can write to and it will be available to the next steps
         run: |
-          echo 'NEW_ENV_VARS=$(date) >> "$GITHUB_ENV"'
-          echo 'JOB_LEVEL_ENV=$RANDOM >> "$GITHUB_ENV"'
+          echo "NEW_ENV_VARS=$(date)" >> "$GITHUB_ENV"
+          echo "JOB_LEVEL_ENV=$RANDOM" >> "$GITHUB_ENV"
       - name: Log custom env vars
         env:
           STEP_LEVEL_ENV: Available to this step only
