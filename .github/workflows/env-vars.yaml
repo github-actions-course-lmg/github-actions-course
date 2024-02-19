@@ -43,3 +43,4 @@ jobs:
           echo "JOB_LEVEL_ENV: $JOB_LEVEL_ENV"
           echo "STEP_LEVEL_ENV: $STEP_LEVEL_ENV"
           echo "NEW_ENV_VARS: $NEW_ENV_VARS"
+          echo "MULTILINE_ENV: $MULTILINE_ENV"
