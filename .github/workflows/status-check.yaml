@@ -7,6 +7,8 @@ jobs:
     steps:
       - name: Step 1
         run: sleep 20
+      - name: Fail
+        run: exit 1
       - name: Runs on failure
         # This is a status check which will return true if any of the previous steps failed
         if: failure()
