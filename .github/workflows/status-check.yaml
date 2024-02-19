@@ -29,7 +29,9 @@ jobs:
         run: echo "Job cancelled"
       - name: Runs if fail step fails
         # This is a status check which will return true if the fail step failed
-        if: steps.fail.conclusion == 'failure'
+        # It is important to note that you must first put the normal 'failure()' check in place
+        # Otherwise, the fail step will not be run as the default 'success()' check will be used
+        if: failure() && steps.fail.conclusion == 'failure'
         run: echo "Fail step failed as anticipated"
   job-2:
     runs-on: ubuntu-latest
