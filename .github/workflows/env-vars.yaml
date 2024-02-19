@@ -28,11 +28,11 @@ jobs:
           echo "JOB_LEVEL_ENV=$RANDOM" >> "$GITHUB_ENV"
       - name: Multiline env var
         run: |
-          DELIMITER="EOF"
+          DELIMITER="1234"
           echo "MULTILINE_ENV<<$DELIMITER" >> "$GITHUB_ENV"
           echo "This is a multiline var. " >> "$GITHUB_ENV"
           echo "This is more of a multiline var" >> "$GITHUB_ENV"
-          echo "$DELIMITER"
+          echo "$DELIMITER" >> "$GITHUB_ENV"
       - name: Log custom env vars
         env:
           STEP_LEVEL_ENV: Available to this step only
