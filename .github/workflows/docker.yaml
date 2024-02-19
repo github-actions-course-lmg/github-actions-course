@@ -1,0 +1,25 @@
+name: Docker action
+on: [push]
+
+jobs:
+  docker-job:
+    runs-on: ubuntu-latest
+    container:
+      image: node:20.3-alpine3.17
+      env:
+        API_URL: some-url.com
+      ports:
+        - 3000:3000
+      #   volumes:
+      #     - vol_name:/path/in/container # named volume
+      #     - /path/to/container # anonymous volume
+      #     - /path.in/host:/path/in/container # bind mount
+    #   options: --cpus 1 --memory 256MB
+    steps:
+      - name: Log node & OS versions
+        run: |
+          node -v
+          cat /etc/os-release
+      - name: Log ENV variables
+        run: |
+          echo $API_URL
