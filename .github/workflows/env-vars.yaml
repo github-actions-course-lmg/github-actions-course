@@ -1,0 +1,13 @@
+name: Environment variables
+on: [push]
+
+jobs:
+  env-vars-and-context:
+    runs-on: ubuntu-latest
+    steps:
+      # This will be evaluated on the runner machine
+      - name: LOG ENV VARS
+        run: echo $GITHUB_REF
+      # This will be sent to the runner machine already evaluated
+      - name: Log context
+        run: echo '${{ github.ref }}'
