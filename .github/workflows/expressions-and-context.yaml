@@ -1,6 +1,10 @@
 name: Expressions and context
 on: [push, pull_request, issues, workflow_dispatch]
 
+# We can control the name that shows after the workflow is triggered
+# Note that by hovering over 'run-name', we can see the available contexts for this expression
+run-name: "Expressions & Context by @${{ github.actor}}, event: ${{ github.event_name }}"
+
 jobs:
   expressions-and-context:
     runs-on: ubuntu-latest
