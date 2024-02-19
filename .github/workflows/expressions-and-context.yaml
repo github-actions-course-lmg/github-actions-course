@@ -6,8 +6,20 @@ on: [push, pull_request, issues, workflow_dispatch]
 run-name: "Expressions & Context by @${{ github.actor}}, event: ${{ github.event_name }}"
 
 jobs:
+  runs-on-issues-and-prs:
+    runs-on: ubuntu-latest
+    # We can control whether the job runs
+    if: contains(fromJson('[pull_request, issues]'), github.event_name)
+    steps:
+      - name: Run only if issue has a bug label
+        # We can also control whether a specifc step runs
+        # This step runs only if the github event labels contain a label with the name 'bug'
+        # The asterix (*) is used to access the name property on each of the objects in labels
+        if: contains(github.event.issue.labels.*.name, 'bug')
+        run: echo "This is a pull request or issue"
   expressions-and-context:
     runs-on: ubuntu-latest
+    if: github.event_name == 'push'
     steps:
       - name: Expressions
         id: expressions
